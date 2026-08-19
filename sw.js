@@ -1,5 +1,5 @@
-const CACHE_NAME = "rateio-pix-v1";
-const APP_ASSETS = ["./", "./index.html", "./styles.css", "./pix.js", "./app.js", "./manifest.webmanifest"];
+const CACHE_NAME = "rateio-pix-v2";
+const APP_ASSETS = ["./", "./index.html", "./styles.css", "./pix.js", "./app.js", "./favicon.svg", "./manifest.webmanifest"];
 const QR_LIBRARY = "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js";
 
 self.addEventListener("install", (event) => {
