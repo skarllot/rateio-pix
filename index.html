@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Rateie assinaturas e gere cobranças Pix compartilháveis." />
+    <title>Rateio Pix</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar"><a class="brand" href="#">rateio<span>pix</span></a><span>Seus dados ficam neste navegador.</span></header>
+    <main>
+      <section class="hero">
+        <p class="eyebrow">ASSINATURAS COMPARTILHADAS</p>
+        <h1>Rateie assinaturas, <em>Pix pronto.</em></h1>
+        <p>Organize serviços da família, calcule cada parte e envie uma cobrança clara em segundos.</p>
+      </section>
+      <section class="layout">
+        <div class="workspace">
+          <section class="card" id="settings-card">
+            <div class="section-title"><div><p class="step">01</p><h2>Dados para receber</h2></div><button class="text-button" id="settings-toggle">Editar</button></div>
+            <div id="settings-summary"></div>
+            <form id="settings-form" class="form-grid hidden">
+              <label>Nome do recebedor<input required name="receiverName" maxlength="25" placeholder="Ex.: Ana Silva" /></label>
+              <label>Cidade<input required name="receiverCity" maxlength="15" placeholder="Ex.: Sao Paulo" /></label>
+              <label>Tipo de chave<select name="keyType"><option value="email">E-mail</option><option value="phone">Telefone</option><option value="cpf">CPF</option><option value="cnpj">CNPJ</option><option value="random">Aleatória</option></select></label>
+              <label>Chave Pix<input required name="pixKey" placeholder="voce@email.com" /></label>
+              <label>Descrição padrão<input name="defaultDescription" maxlength="99" placeholder="Assinaturas" /></label>
+              <label>TXID padrão<input name="defaultTxid" maxlength="25" value="RATEIO" /></label>
+              <button class="button primary" type="submit">Salvar dados</button>
+            </form>
+          </section>
+          <section class="card">
+            <div class="section-title"><div><p class="step">02</p><h2>Participantes</h2></div></div>
+            <form id="participant-form" class="inline-form"><input name="name" required placeholder="Nome da pessoa" /><input name="note" placeholder="Observação (opcional)" /><button class="button" type="submit">Adicionar</button></form>
+            <div class="chips" id="participant-list"></div>
+          </section>
+          <section class="card">
+            <div class="section-title"><div><p class="step">03</p><h2>Serviços compartilhados</h2></div></div>
+            <form id="service-form" class="service-form">
+              <input name="name" required placeholder="Nome do serviço" />
+              <input name="description" placeholder="Descrição (opcional)" />
+              <label>Frequência<select name="frequency"><option value="monthly">Mensal</option><option value="annual">Anual</option><option value="one-time">Avulso</option></select></label>
+              <label>Valor total<input name="amount" type="number" min="0.01" step="0.01" required placeholder="0,00" /></label>
+              <label class="annual-mode hidden">Cobrar como<select name="annualMode"><option value="annual">Valor anual</option><option value="monthly">Parcela mensal</option></select></label>
+              <label class="one-time-mode hidden">Número de parcelas (opcional)<input name="installments" type="number" min="1" step="1" placeholder="À vista" /></label>
+              <label class="one-time-mode hidden">Parcela atual<input name="currentInstallment" type="number" min="1" step="1" value="1" /></label>
+              <fieldset id="service-participants"><legend>Quem participa?</legend><p class="hint">Adicione participantes primeiro.</p></fieldset>
+              <button class="button primary" type="submit">Adicionar serviço</button>
+            </form>
+            <div id="service-list" class="service-list"></div>
+          </section>
+        </div>
+        <aside class="card charge-card" id="charge-print">
+          <div class="section-title"><div><p class="step">04</p><h2>Gerar cobrança</h2></div></div>
+          <form id="charge-form" class="form-grid">
+            <label>Participante<select name="participant" id="charge-participant" required></select></label>
+            <label>Referência<input name="reference" required placeholder="Agosto/2026" /></label>
+            <label>Vencimento (opcional)<input name="dueDate" type="date" /></label>
+            <label>Descrição Pix<input name="description" maxlength="99" placeholder="Assinaturas Ago 2026" /></label>
+            <button class="button primary" type="submit">Criar cobrança Pix</button>
+          </form>
+          <div id="charge-result" class="charge-result empty">Selecione uma pessoa para ver o rateio.</div>
+        </aside>
+      </section>
+    </main>
+    <template id="participant-template"><span class="chip"><span class="chip-name"></span><button type="button" aria-label="Remover">×</button></span></template>
+    <template id="service-template"><article class="service"><div><strong class="service-name"></strong><p class="service-meta"></p><p class="service-people"></p></div><div><strong class="service-amount"></strong><button class="edit remove" type="button">Editar</button><button class="remove" type="button">Remover</button></div></article></template>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="pix.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
