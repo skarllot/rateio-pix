@@ -55,3 +55,4 @@ $("#charge-form").onsubmit = async (event) => { event.preventDefault(); const fo
 $("#charge-form").elements.reference.value = currentReference();
 render();
 document.addEventListener("click", (event) => { if (event.target.id !== "print-charge") return; event.preventDefault(); event.stopImmediatePropagation(); printCharge(); }, true);
+if ("serviceWorker" in navigator && location.protocol !== "file:") window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js").catch(() => {}));

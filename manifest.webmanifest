@@ -1,0 +1,18 @@
+{
+  "name": "Rateio Pix",
+  "short_name": "Rateio Pix",
+  "description": "Rateie assinaturas compartilhadas e gere cobranças Pix.",
+  "lang": "pt-BR",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f5f5ee",
+  "theme_color": "#146b45",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

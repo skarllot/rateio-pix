@@ -36,7 +36,7 @@ jobs:
       - name: 🏗️ Prepare static site
         run: |
           mkdir _site
-          cp index.html app.js pix.js styles.css _site/
+          cp index.html app.js pix.js styles.css favicon.svg manifest.webmanifest sw.js _site/
           touch _site/.nojekyll
 
       - name: 📤 Upload artifact
