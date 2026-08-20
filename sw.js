@@ -1,15 +1,10 @@
-const CACHE_NAME = "rateio-pix-v2";
-const APP_ASSETS = ["./", "./index.html", "./styles.css", "./pix.js", "./app.js", "./favicon.svg", "./manifest.webmanifest"];
-const QR_LIBRARY = "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js";
+const CACHE_NAME = "rateio-pix-v3";
+const APP_ASSETS = ["./", "./index.html", "./styles.css", "./pix.js", "./qrcode.min.js", "./app.js", "./favicon.svg", "./manifest.webmanifest"];
 
 self.addEventListener("install", (event) => {
   event.waitUntil((async () => {
     const cache = await caches.open(CACHE_NAME);
     await cache.addAll(APP_ASSETS);
-    try {
-      const response = await fetch(QR_LIBRARY);
-      await cache.put(QR_LIBRARY, response);
-    } catch { /* O app permanece disponível; o QR será armazenado na próxima conexão. */ }
     await self.skipWaiting();
   })());
 });
