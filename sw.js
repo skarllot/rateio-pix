@@ -1,5 +1,5 @@
-const CACHE_NAME = "rateio-pix-v6";
-const APP_ASSETS = ["./", "./index.html", "./styles.css?v=6", "./pix.js?v=6", "./qrcode.min.js?v=6", "./app.js?v=6", "./favicon.svg", "./manifest.webmanifest"];
+const CACHE_NAME = "rateio-pix-v7";
+const APP_ASSETS = ["./", "./index.html", "./styles.css?v=7", "./pix.js?v=7", "./qrcode.min.js?v=7", "./app.js?v=7", "./favicon.svg", "./manifest.webmanifest"];
 
 self.addEventListener("install", (event) => {
   event.waitUntil((async () => {
