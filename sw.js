@@ -1,4 +1,4 @@
-const CACHE_NAME = "rateio-pix-v3";
+const CACHE_NAME = "rateio-pix-v4";
 const APP_ASSETS = ["./", "./index.html", "./styles.css", "./pix.js", "./qrcode.min.js", "./app.js", "./favicon.svg", "./manifest.webmanifest"];
 
 self.addEventListener("install", (event) => {
