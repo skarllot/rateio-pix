@@ -42,8 +42,15 @@ function validatePixKey(key, type) {
 }
 
 function sanitizePixText(value, maxBytes) {
+  const normalized = value
+    .trim()
+    .normalize("NFD")
+    .replace(/\p{M}/gu, "")
+    .replace(/[^\x20-\x7E]/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
   let result = "";
-  for (const character of value.trim()) {
+  for (const character of normalized) {
     if (utf8Length(result + character) > maxBytes) break;
     result += character;
   }
