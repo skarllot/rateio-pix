@@ -1,5 +1,5 @@
-const CACHE_NAME = "rateio-pix-v5";
-const APP_ASSETS = ["./", "./index.html", "./styles.css", "./pix.js", "./qrcode.min.js", "./app.js", "./favicon.svg", "./manifest.webmanifest"];
+const CACHE_NAME = "rateio-pix-v6";
+const APP_ASSETS = ["./", "./index.html", "./styles.css?v=6", "./pix.js?v=6", "./qrcode.min.js?v=6", "./app.js?v=6", "./favicon.svg", "./manifest.webmanifest"];
 
 self.addEventListener("install", (event) => {
   event.waitUntil((async () => {
@@ -19,17 +19,26 @@ self.addEventListener("activate", (event) => {
 self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET") return;
   event.respondWith((async () => {
-    const cached = await caches.match(event.request);
+    const cache = await caches.open(CACHE_NAME);
+    if (event.request.mode === "navigate") {
+      try {
+        const response = await fetch(event.request);
+        await cache.put("./index.html", response.clone());
+        return response;
+      } catch {
+        return cache.match("./index.html");
+      }
+    }
+
+    const cached = await cache.match(event.request);
     if (cached) return cached;
     try {
       const response = await fetch(event.request);
       if (event.request.url.startsWith(self.location.origin)) {
-        const cache = await caches.open(CACHE_NAME);
-        cache.put(event.request, response.clone());
+        await cache.put(event.request, response.clone());
       }
       return response;
     } catch {
-      if (event.request.mode === "navigate") return caches.match("./index.html");
       return new Response("Offline", { status: 503, statusText: "Offline" });
     }
   })());
